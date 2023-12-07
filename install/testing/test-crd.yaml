@@ -1,0 +1,27 @@
+apiVersion: "rcube.com/v1"
+kind: ConfigMapCustomResource
+metadata:
+  namespace: local
+  name: application-toggles-config
+  labels:
+    application: nginx-deployment
+spec:
+  config:
+    data:
+      application-toggles-config.json: |
+        {
+        "startNewFlow": true
+        }
+    schema:
+      application-toggles-config.json: |
+        {
+            "type": "object",
+            "properties": {
+                "startNewFlow": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+              "startNewFlow"
+            ]
+          }

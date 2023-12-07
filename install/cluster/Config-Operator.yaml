@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: configs-operator
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: configs-operator
+  namespace: configs-operator
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configs-operator
+  namespace: configs-operator
+spec:
+  selector:
+    matchLabels:
+      application: configs-operator
+  template:
+    metadata:
+      labels:
+        application: configs-operator
+    spec:
+      serviceAccountName: configs-operator
+      containers:
+        - name: operator
+          image: configs-operator:version-2
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: 512Mi
+            limits:
+              memory: 512Mi
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: configs-operator-role
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - secrets
+      - events
+    verbs:
+      - '*'
+  - apiGroups:
+      - "apps"
+    resources:
+      - configmaps
+      - deployments
+    verbs:
+      - '*'
+  - apiGroups:
+      - "apiextensions.k8s.io"
+    resources:
+      - customresourcedefinitions
+    resourceNames:
+      - configmapcustomresources.rcube.com
+    verbs:
+      - get
+      - list
+      - create
+  - apiGroups:
+      - "rcube.com"
+    resources:
+      - configmapcustomresources
+      - configmapcustomresources/status
+    verbs:
+      - get
+      - list
+      - create
+      - watch
+      - update
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: configs-operator-admin
+subjects:
+  - kind: ServiceAccount
+    name: configs-operator
+    namespace: configs-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: configs-operator-role

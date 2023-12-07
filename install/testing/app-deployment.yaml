@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: local
+---
+apiVersion: "rcube.com/v1"
+kind: ConfigMapCustomResource
+metadata:
+  namespace: local
+  name: application-toggles-config
+  labels:
+    application: nginx-deployment
+spec:
+  config:
+    data:
+      application-toggles-config.json: |
+        {
+        "startNewFlow": true
+        }
+    schema:
+      application-toggles-config.json: |
+        {
+            "type": "object",
+            "properties": {
+                "startNewFlow": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+              "startNewFlow"
+            ]
+          }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: local
+  labels:
+    app: nginx
+    config-handler: "true"
+    config-map-version: "master-10"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        volumeMounts:
+          - name: application-toggles-config
+            mountPath: /etc/config
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: application-toggles-config
+          configMap:
+            name: "application-toggles-config-master-10"
