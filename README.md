@@ -19,6 +19,7 @@ The core objective of this tooling is to implement a well-defined opinionated sa
 
 3. Each deployment should maintain its own version of a config-map. In the event of faulty changes to the config-map, this approach facilitates the seamless redirection of traffic to the last known working state with minimal impact. Additionally, this practice provides us with the capability to conduct A/B testing for new configurations.
 
+## Components
 ### Custom config-map resource
 
 The custom config-map resource is an extension of the native k8s config-map resource. The custom resource has an
