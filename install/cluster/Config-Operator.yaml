@@ -28,8 +28,8 @@ spec:
       serviceAccountName: configs-operator
       containers:
         - name: operator
-          image: configs-operator:version-2
-          imagePullPolicy: Never
+          image: malla/configs-operator:main
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: 512Mi

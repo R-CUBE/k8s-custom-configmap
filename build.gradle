@@ -39,7 +39,6 @@ dependencies {
 }
 
 tasks.register('copyCRDResource', Copy) {
-    dependsOn('compileJava')
     description = "Copy generated CRD from build folder to install directory"
     from layout.buildDirectory.dir("classes/java/main/META-INF/fabric8")
     include "*.yml"
@@ -47,5 +46,6 @@ tasks.register('copyCRDResource', Copy) {
 }
 
 tasks.named('test') {
+    dependsOn('copyCRDResource')
     useJUnitPlatform()
 }

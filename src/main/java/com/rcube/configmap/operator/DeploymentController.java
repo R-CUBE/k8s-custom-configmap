@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @AllArgsConstructor
-@ControllerConfiguration(labelSelector = "config-handler")
+@ControllerConfiguration(labelSelector = "config-map-version")
 public class DeploymentController implements Reconciler<Deployment> {
 
     private final KubernetesClient kubernetesClient;

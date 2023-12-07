@@ -39,7 +39,6 @@ metadata:
   namespace: local
   labels:
     app: nginx
-    config-handler: "true"
     config-map-version: "master-10"
 spec:
   replicas: 2
