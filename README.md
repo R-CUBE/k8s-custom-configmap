@@ -1,3 +1,5 @@
+![Build status](https://github.com/rameshmalla/k8s-custom-configmap/actions/workflows/gradle.yml/badge.svg)
+
 # k8s-custom-configmap
 
 `k8s-custom-configmap` is a custom k8s config-map resource which includes JSON data validation and create 
