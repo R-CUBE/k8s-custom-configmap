@@ -78,6 +78,7 @@ below operations.
 
 The config operator validates the `data` in the config against the JSON `schema` before generating the necessary config
 map. The `schema` adheres to the [Draft-4](https://json-schema.org/specification-links#draft-4) convention.
+
 ![Validation flow](./docs/validation.png)
 
 ### Restricts direct changes to the native config-map resource
