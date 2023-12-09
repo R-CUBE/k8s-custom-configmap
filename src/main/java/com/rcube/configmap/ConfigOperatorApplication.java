@@ -6,11 +6,14 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import io.fabric8.kubernetes.client.utils.Serialization;
+import io.javaoperatorsdk.operator.monitoring.micrometer.MicrometerMetrics;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ConfigMapHandlerApplication {
+public class ConfigOperatorApplication {
 
     static {
         Serialization.jsonMapper().findAndRegisterModules()
@@ -23,7 +26,12 @@ public class ConfigMapHandlerApplication {
                 .configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
     }
 
+    @Bean
+    public MicrometerMetrics micrometerMetrics(final MeterRegistry meterRegistry){
+        return MicrometerMetrics.withoutPerResourceMetrics(meterRegistry);
+    }
+
     public static void main(String[] args) {
-        SpringApplication.run(ConfigMapHandlerApplication.class, args);
+        SpringApplication.run(ConfigOperatorApplication.class, args);
     }
 }

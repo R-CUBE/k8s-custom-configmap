@@ -1,2 +1,18 @@
 javaoperatorsdk:
   check-crd-and-validate-local-model: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ "health", "metrics", "prometheus", "mappings" ]
+  server:
+    port: 7979
+  metrics:
+    distribution:
+      percentiles:
+        all: [ 0.99, 0.95, 0.75 ]
+      percentiles-histogram:
+        all: true
+    enable:
+      all: true
