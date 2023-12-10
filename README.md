@@ -210,6 +210,8 @@ data:
 ## Example
 Apply this [example](./install/testing/app-deployment.yaml) to play with the custom config-map resource.
 
+## Developers guide
+Refer to this [page](DEVELOPMENT.md).
 ## Getting help
 If you have questions, concerns, bug reports, etc., please file an issue in this repository's [Issue Tracker](https://github.com/rameshmalla/k8s-custom-configmap/issues).
 

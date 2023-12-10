@@ -1,5 +1,7 @@
 # Contributor Covenant Code of Conduct
 
+_**In the grand play of code, let’s make kindness our main function. After all, a little humor and a sprinkle of 'please' and 'thank you' never hurt anyone's development stack!**_
+
 ## Our Pledge
 
 In the interest of fostering an open and welcoming environment, we as

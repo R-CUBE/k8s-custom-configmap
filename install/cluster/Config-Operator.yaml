@@ -29,7 +29,6 @@ spec:
       containers:
         - name: operator
           image: malla/configs-operator:main
-          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: 512Mi
