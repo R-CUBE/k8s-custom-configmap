@@ -76,16 +76,13 @@ below operations.
 
 ### Validate config-map JSON data against JSON schema
 
-The config operator validates the `data` in the config against the JSON `schema` before generating the necessary config
-map. The `schema` adheres to the [Draft-4](https://json-schema.org/specification-links#draft-4) convention.
+Before generating the required config map, the config operator validates the JSON `data` within the configuration against a JSON `schema`, adhering to the [Draft-4](https://json-schema.org/specification-links#draft-4) convention. This ensures that the configuration adheres to the specified structure and standards.
 
 ![Validation flow](./docs/validation.png)
 
 ### Restricts direct changes to the native config-map resource
 
-The config-operator monitors the dependent resources (k8s native config-map) of the custom config-map and resets any
-manual changes made to the dependent resources. This is done to ensure that config-maps can only be updated through
-changes to the custom config-map resource, thereby ensuring proper validations.
+To maintain control and consistency, the config-operator imposes restrictions on direct alterations to the native config-map resource. By actively monitoring dependent resources linked to the custom config-map, the operator resets any manual changes made to these resources. This proactive measure guarantees that config-maps can only be updated through modifications to the custom config-map resource, thus enforcing proper validation procedures.
 
 ![Rollback flow](./docs/rollback-config.png)
 
