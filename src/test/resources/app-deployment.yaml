@@ -13,23 +13,24 @@ metadata:
 spec:
   config:
     data:
+      allow-snippet-annotations: "false"
       application-toggles-config.json: |
         {
         "startNewFlow": true
         }
-    schema:
-      application-toggles-config.json: |
-        {
-            "type": "object",
-            "properties": {
-                "startNewFlow": {
-                    "type": "boolean"
-                }
-            },
-            "required": [
-              "startNewFlow"
-            ]
-          }
+#    schema:
+#      application-toggles-config.json: |
+#        {
+#            "type": "object",
+#            "properties": {
+#                "startNewFlow": {
+#                    "type": "boolean"
+#                }
+#            },
+#            "required": [
+#              "startNewFlow"
+#            ]
+#          }
 
 ---
 apiVersion: apps/v1

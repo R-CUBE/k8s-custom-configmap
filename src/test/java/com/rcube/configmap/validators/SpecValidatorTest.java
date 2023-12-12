@@ -18,9 +18,8 @@ class SpecValidatorTest {
     @Test
     public void testSpecValidations() {
         SpecValidator validator = new SpecValidator(new JsonContentValidators(new ObjectMapper()));
-        Assertions.assertDoesNotThrow(() -> validator.validatesResourceContent(getValidConfigSpec()));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.validatesResourceContent(getConfigSpecWithoutSchema()));
-        Assertions.assertThrows(RuntimeException.class, () -> validator.validatesResourceContent(getConfigSpecWithInvalidData()));
+        Assertions.assertDoesNotThrow(() -> validator.validateResourceContent(getValidConfigSpec()));
+        Assertions.assertThrows(RuntimeException.class, () -> validator.validateResourceContent(getConfigSpecWithInvalidData()));
     }
 
 

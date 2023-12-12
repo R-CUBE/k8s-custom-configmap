@@ -33,7 +33,7 @@ public class ConfigMapController implements Reconciler<ConfigMapCustomResource>,
     public UpdateControl<ConfigMapCustomResource> reconcile(final ConfigMapCustomResource resource, final Context<ConfigMapCustomResource> context) {
         try {
             log.info("Context being reloaded for [{}]",context.getSecondaryResource(ConfigMap.class).map(map -> map.getMetadata().getName()).orElse("None"));
-            specValidator.validatesResourceContent(resource);
+            specValidator.validateResourceContent(resource);
             createConfigMap(resource);
             resource.setStatus(ResourceStatus.builder().build());
         } catch (Exception ex) {

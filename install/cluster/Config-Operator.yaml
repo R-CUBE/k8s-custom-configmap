@@ -28,7 +28,7 @@ spec:
       serviceAccountName: configs-operator
       containers:
         - name: operator
-          image: malla/configs-operator:main
+          image: configs-operator:test_69
           resources:
             requests:
               memory: 512Mi

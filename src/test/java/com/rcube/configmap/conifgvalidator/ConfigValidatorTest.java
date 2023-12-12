@@ -99,7 +99,6 @@ public class ConfigValidatorTest {
                                     .filter(Objects::nonNull)
                                     .map(ConfigMapVolumeSource::getName)
                                     .forEach(requestedConfigMaps -> {
-                                        System.out.println(requestedConfigMaps);
                                         assertNotNull(getResource(nameSpace, requestedConfigMaps, ConfigMap.class));
                                     });
                         });

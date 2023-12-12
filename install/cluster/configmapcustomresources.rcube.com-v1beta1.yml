@@ -24,6 +24,7 @@ spec:
                 schema:
                   additionalProperties:
                     type: string
+                  nullable: true
                   type: object
                 apiVersion:
                   type: string
@@ -111,6 +112,8 @@ spec:
                       type: string
                   type: object
               type: object
+          required:
+          - config
           type: object
         status:
           properties:

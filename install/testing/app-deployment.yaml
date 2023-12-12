@@ -32,6 +32,37 @@ spec:
           }
 
 ---
+
+apiVersion: "rcube.com/v1"
+kind: ConfigMapCustomResource
+metadata:
+  namespace: local
+  name: projected-config
+  labels:
+    application: nginx-deployment
+spec:
+  config:
+    data:
+      allow-snippet-annotations: "false"
+      projected-config.json: |
+        {
+        "aProjectedConfig": true
+        }
+    schema:
+      projected-config.json: |
+        {
+            "type": "object",
+            "properties": {
+                "aProjectedConfig": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+              "aProjectedConfig"
+            ]
+          }
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,11 +85,20 @@ spec:
       - name: nginx
         image: nginx:1.14.2
         volumeMounts:
-          - name: application-toggles-config
+#          - name: application-toggles-config
+#            mountPath: /etc/config
+          - name: projected-config
             mountPath: /etc/config
         ports:
         - containerPort: 80
       volumes:
-        - name: application-toggles-config
-          configMap:
-            name: "application-toggles-config-master-10"
+#        - name: application-toggles-config
+#          configMap:
+#            name: "application-toggles-config-master-10"
+        - name: projected-config
+          projected:
+            sources:
+              - configMap:
+                  name: application-toggles-config-master-10
+              - configMap:
+                  name: projected-config-master-10
