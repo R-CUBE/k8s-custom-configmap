@@ -1,4 +1,4 @@
-![Build status](https://github.com/rameshmalla/k8s-custom-configmap/actions/workflows/gradle.yml/badge.svg)
+![Build status](https://github.com/rameshmalla/k8s-custom-configmap/actions/workflows/release-operator.yaml/badge.svg)
 
 # k8s-custom-configmap
 
