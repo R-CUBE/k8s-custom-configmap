@@ -32,7 +32,10 @@ public class ConfigMapController implements Reconciler<ConfigMapCustomResource>,
     @Override
     public UpdateControl<ConfigMapCustomResource> reconcile(final ConfigMapCustomResource resource, final Context<ConfigMapCustomResource> context) {
         try {
-            log.info("Context being reloaded for [{}]",context.getSecondaryResource(ConfigMap.class).map(map -> map.getMetadata().getName()).orElse("None"));
+            val reloadedResource = context.getSecondaryResource(ConfigMap.class)
+                    .map(map -> map.getMetadata().getName())
+                    .orElse("None");
+            log.info("Context being reloaded for [{}]", reloadedResource);
             specValidator.validateResourceContent(resource);
             createConfigMap(resource);
             resource.setStatus(ResourceStatus.builder().build());
@@ -73,7 +76,7 @@ public class ConfigMapController implements Reconciler<ConfigMapCustomResource>,
 
     @Override
     public Map<String, EventSource> prepareEventSources(final EventSourceContext<ConfigMapCustomResource> context) {
-        InformerConfiguration<ConfigMap> configuration =
+        final InformerConfiguration<ConfigMap> configuration =
                 InformerConfiguration.from(ConfigMap.class, context)
                         .build();
         return EventSourceInitializer
