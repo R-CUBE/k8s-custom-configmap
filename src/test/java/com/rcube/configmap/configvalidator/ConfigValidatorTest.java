@@ -1,4 +1,4 @@
-package com.rcube.configmap.conifgvalidator;
+package com.rcube.configmap.configvalidator;
 
 import com.rcube.configmap.TestDataUtil;
 import com.rcube.configmap.operator.ConfigMapCustomResource;
