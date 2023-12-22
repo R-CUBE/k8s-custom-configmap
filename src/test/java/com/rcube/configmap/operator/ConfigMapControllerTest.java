@@ -39,7 +39,7 @@ public class ConfigMapControllerTest {
 
     private static final Pair<String, String> TEST_DATA = TestDataUtil.validSchemaData();
 
-    //@Test
+    @Test
     public void contextLoads() {
         final CustomResourceDefinition customResourceDefinition = client.apiextensions()
                 .v1()
@@ -50,7 +50,7 @@ public class ConfigMapControllerTest {
         assertNotNull(customResourceDefinition);
     }
 
-    //@Test
+    @Test
     public void testShouldCreateConfigMapFromCustomResource() {
         String testNS = "test-ns";
         client.namespaces().resource(namespace(testNS)).create();
