@@ -1,8 +1,6 @@
-package com.rcube.configmap.configvalidator;
+package com.rcube.configmap.operator;
 
 import com.rcube.configmap.TestDataUtil;
-import com.rcube.configmap.operator.ConfigMapCustomResource;
-import com.rcube.configmap.operator.CustomConfigMapSpec;
 import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.kubernetes.api.model.ConfigMapVolumeSource;
 import io.fabric8.kubernetes.api.model.HasMetadata;
@@ -34,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @EnableMockOperator(
         crdPaths = "install/cluster/configmapcustomresources.rcube.com-v1.yml"
 )
-public class ConfigValidatorTest {
+public class ConfigMapControllerTest {
 
     @Autowired
     private KubernetesClient client;
@@ -132,7 +130,7 @@ public class ConfigValidatorTest {
     }
 
     private InputStream fetchResource(String fileName) {
-        return ConfigValidatorTest.class.getClassLoader().getResourceAsStream(fileName);
+        return ConfigMapControllerTest.class.getClassLoader().getResourceAsStream(fileName);
     }
 
 }
